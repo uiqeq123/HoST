@@ -1,28 +1,5 @@
 <?xml version="1.0" ?>
 <robot name="kbotv2p0_nohands">
-   <!-- Auxiliary keyframe_head_link -->
-  <link name="keyframe_head_link">
-		<!-- <visual>
-		<origin xyz="0 0 0" rpy="0 0 0"/>
-		<geometry>
-			<sphere radius="0.05"/>
-		</geometry>
-		</visual> -->
-		<visual>
-			<geometry>
-			<!-- 定义几何形状，例如盒子 -->
-			<box size="0.01 0.01 0.01"/>
-			</geometry>
-			<material name="white">
-			<color rgba="1.7 0.7 0.7 1"/>
-			</material>
-		</visual>
-  </link>
-  <joint name="keyframe_head_joint" type="fixed" dont_collapse="true">
-		<origin xyz="0 0 0.08" rpy="0 0 0"/>
-		<parent link="base"/>
-		<child link="keyframe_head_link"/>
-  </joint>
   <link name="base">
     <visual name="base_visual">
       <geometry name="base_geometry">
@@ -204,6 +181,12 @@
       <inertia ixx="0.485847" iyy="0.512347" izz="0.059200" ixy="0.000137" ixz="-0.000988" iyz="0.010329"/>
       <origin xyz="0.093177 -0.000920 -0.063462" rpy="0 0 0"/>
     </inertial>
+    <collision name="Torso_Side_Right">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="Torso_Side_Right">
+        <mesh filename="meshes/Torso_Side_Right.stl"/>
+      </geometry>
+    </collision>
   </link>
   <link name="KC_C_104R_PitchHardstopDriven">
     <visual name="KC_C_104R_PitchHardstopDriven_visual">
@@ -519,12 +502,106 @@
         <color rgba="0.098039 0.098039 0.098039 1"/>
       </material>
     </visual>
-    <collision name="KB_D_501R_R_LEG_FOOT.collision">
+   <collision name="KB_D_501R_R_LEG_FOOT.collision">
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry name="KB_D_501R_R_LEG_FOOT_collision_geometry">
         <mesh filename="meshes/KB_D_501R_R_LEG_FOOT.collision.stl"/>
       </geometry>
     </collision>
+
+    <!-- modify right foot collision
+    -->
+    <!--
+     <collision>
+      <origin xyz="-0.06 0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.06 -0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0975 -0.0 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.09 0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.09 -0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="-0.08 0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.08 -0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.15 0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.15 -0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.12 0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 -0.011 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.02 0.011 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.02 -0.011 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.197 -0.0 -0.065" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    -->
     <inertial name="KB_D_501R_R_LEG_FOOT_inertial">
       <mass value="0.620712"/>
       <inertia ixx="0.000370" iyy="0.002011" izz="0.001945" ixy="0.000111" ixz="0.000019" iyz="-0.000021"/>
@@ -532,6 +609,137 @@
     </inertial>
   </link>
 
+  <link name="KB_D_501L_L_LEG_FOOT">
+    <visual name="KB_D_501L_L_LEG_FOOT_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="KB_D_501L_L_LEG_FOOT_geometry">
+        <mesh filename="meshes/KB_D_501L_L_LEG_FOOT.stl"/>
+      </geometry>
+      <material name="KB_D_501L_L_LEG_FOOT_material">
+        <color rgba="0.098039 0.098039 0.098039 1"/>
+      </material>
+    </visual>
+   <collision name="KB_D_501L_L_LEG_FOOT.collision">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry name="KB_D_501L_L_LEG_FOOT_collision_geometry">
+        <mesh filename="meshes/KB_D_501L_L_LEG_FOOT.collision.stl"/>
+      </geometry>
+    </collision>
+    <!-- modify left foot collision
+    -->
+    <!-- <collision>
+      <origin xyz="-0.05 0.04 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.05 -0.04 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 0.04 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.12 -0.04 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.05 -0.04 -0.035" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.05 0.035 -0.035" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.17 -0.0 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="-0.082 -0.0 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.082 -0.0 -0.022" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.081 -0.036 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.081 0.036 -0.04" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <collision>
+      <origin xyz="0.1 -0.0 -0.0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.068 -0.0 -0.0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+    -->
+    <inertial name="KB_D_501L_L_LEG_FOOT_inertial">
+      <mass value="0.620712"/>
+      <inertia ixx="0.000370" iyy="0.002011" izz="0.001945" ixy="0.000111" ixz="-0.000019" iyz="0.000021"/>
+      <origin xyz="-0.017470 0.032456 0.015742" rpy="0 0 0"/>
+    </inertial>
+  </link>
+
+
+  <!-- Auxiliary keyframe_head_link -->
+  <link name="keyframe_head_link">
+		<!-- <visual>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<geometry>
+			<sphere radius="0.05"/>
+		</geometry>
+		</visual> -->
+		<visual>
+			<geometry>
+			<!-- 定义几何形状，例如盒子 -->
+			<box size="0.01 0.01 0.01"/>
+			</geometry>
+			<material name="white">
+			<color rgba="1.7 0.7 0.7 1"/>
+			</material>
+		</visual>
+  </link>
+  <joint name="keyframe_head_joint" type="fixed" dont_collapse="true">
+		<origin xyz="-0.10 -0.10 -0.39" rpy="0 0 0"/>
+		<parent link="base"/>
+		<child link="Torso_Side_Right"/>
+  </joint>
   <!-- Auxiliary left foot -->
   <link name="auxiliary_l_foot_link1">
 		<visual>
@@ -542,7 +750,7 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_l_foot_joint1" type="fixed" dont_collapse="true">
-		<origin xyz="-0.04 0.1 0" rpy="0 0 0"/>
+		<origin xyz="-0.2 -0.005 0" rpy="0 0 0"/>
 		<parent link="KB_D_501R_R_LEG_FOOT"/>
 		<child link="auxiliary_l_foot_link1"/>
 	</joint>
@@ -555,7 +763,7 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_l_foot_joint2" type="fixed" dont_collapse="true">
-		<origin xyz="-0.04 -0.1 0" rpy="0 0 0"/>
+		<origin xyz="0.15 -0.005 0" rpy="0 0 0"/>
 		<parent link="KB_D_501R_R_LEG_FOOT"/>
 		<child link="auxiliary_l_foot_link2"/>
 	</joint>
@@ -569,7 +777,7 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_l_foot_joint3" type="fixed" dont_collapse="true">
-		<origin xyz="0.07 0 0" rpy="0 0 0"/>
+		<origin xyz="0 -0.005 0.10" rpy="0 0 0"/>
 		<parent link="KB_D_501R_R_LEG_FOOT"/>
 		<child link="auxiliary_l_foot_link3"/>
 	</joint>
@@ -582,34 +790,11 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_l_foot_joint4" type="fixed" dont_collapse="true">
-		<origin xyz="-0.15 0 0" rpy="0 0 0"/>
+		<origin xyz="0 -0.005 -0.10" rpy="0 0 0"/>
 		<parent link="KB_D_501R_R_LEG_FOOT"/>
 		<child link="auxiliary_l_foot_link4"/>
 	</joint>
 
-
-  <link name="KB_D_501L_L_LEG_FOOT">
-    <visual name="KB_D_501L_L_LEG_FOOT_visual">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry name="KB_D_501L_L_LEG_FOOT_geometry">
-        <mesh filename="meshes/KB_D_501L_L_LEG_FOOT.stl"/>
-      </geometry>
-      <material name="KB_D_501L_L_LEG_FOOT_material">
-        <color rgba="0.098039 0.098039 0.098039 1"/>
-      </material>
-    </visual>
-    <collision name="KB_D_501L_L_LEG_FOOT.collision">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry name="KB_D_501L_L_LEG_FOOT_collision_geometry">
-        <mesh filename="meshes/KB_D_501L_L_LEG_FOOT.collision.stl"/>
-      </geometry>
-    </collision>
-    <inertial name="KB_D_501L_L_LEG_FOOT_inertial">
-      <mass value="0.620712"/>
-      <inertia ixx="0.000370" iyy="0.002011" izz="0.001945" ixy="0.000111" ixz="-0.000019" iyz="0.000021"/>
-      <origin xyz="-0.017470 0.032456 0.015742" rpy="0 0 0"/>
-    </inertial>
-  </link>
 
   <!-- Auxiliary right foot -->
   <link name="auxiliary_r_foot_link1">
@@ -620,9 +805,8 @@
 		</geometry>
 		</visual>
   </link>
-    todo 待修正位置，以及foot上面的碰撞点
 	<joint name="auxiliary_r_foot_joint1" type="fixed" dont_collapse="true">
-		<origin xyz="-0.04 0.1 0" rpy="0 0 0"/>
+		<origin xyz="-0.2 -0.005 0" rpy="0 0 0"/>
 		<parent link="KB_D_501L_L_LEG_FOOT"/>
 		<child link="auxiliary_r_foot_link1"/>
 	</joint>
@@ -635,7 +819,7 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_r_foot_joint2" type="fixed" dont_collapse="true">
-		<origin xyz="-0.04 -0.1 0" rpy="0 0 0"/>
+		<origin xyz="0.15 -0.005 0" rpy="0 0 0"/>
 		<parent link="KB_D_501L_L_LEG_FOOT"/>
 		<child link="auxiliary_r_foot_link2"/>
 	</joint>
@@ -649,7 +833,7 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_r_foot_joint3" type="fixed" dont_collapse="true">
-		<origin xyz="0.07 0 0" rpy="0 0 0"/>
+		<origin xyz="0 -0.005 0.10" rpy="0 0 0"/>
 		<parent link="KB_D_501L_L_LEG_FOOT"/>
 		<child link="auxiliary_r_foot_link3"/>
 	</joint>
@@ -662,8 +846,10 @@
 		</visual>
 	</link>
 	<joint name="auxiliary_r_foot_joint4" type="fixed" dont_collapse="true">
-		<origin xyz="-0.15 0 0" rpy="0 0 0"/>
+		<origin xyz="0 -0.005 -0.10" rpy="0 0 0"/>
 		<parent link="KB_D_501L_L_LEG_FOOT"/>
 		<child link="auxiliary_r_foot_link4"/>
 	</joint>
+
+
 </robot>
