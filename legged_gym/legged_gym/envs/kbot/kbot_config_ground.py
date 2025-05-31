@@ -178,8 +178,8 @@ class KbotCfg( LeggedRobotCfg ):
         keyframe_name = "keyframe"
         head_name = 'keyframe_head'
 
-        trunk_names = ["pelvis", "torso"]
-        base_name = 'torso_link'
+        trunk_names = ["Torso_Side_Right"]
+        base_name = 'base'
 
         left_upper_body_names = ['dof_left_shoulder_pitch_03', 'dof_left_elbow_02']
         right_upper_body_names = ['dof_right_shoulder_pitch_03', 'dof_right_elbow_02']
