@@ -6,59 +6,57 @@ class KbotCfg( LeggedRobotCfg ):
         pos = [0.0, 0.0, 0.5] # x,y,z [m]
         rot = [0.0, -1, 0, 1.0] # x,y,z,w [quat]
         target_joint_angles = { # = target angles [rad] when action = 0.0
-           'left_hip_yaw_joint' : 0. ,   
-           'left_hip_roll_joint' : 0,               
-           'left_hip_pitch_joint' : 0,
-           'left_knee_joint' : 0,
-           'left_ankle_pitch_joint' : 0,
-           'left_ankle_roll_joint' : 0,
-           'left_wrist_roll_joint' : 0,         
-           'right_hip_yaw_joint' : 0,
-           'right_hip_roll_joint' : 0, 
-           'right_hip_pitch_joint' : 0,
-           'right_knee_joint' : 0,
-           'right_ankle_pitch_joint': 0,
-           'right_ankle_roll_joint' : 0,     
-           'right_wrist_roll_joint' : 0,
-            'waist_yaw_joint' : 0.0, 
-            'waist_pitch_joint' : 0.0, 
-            'waist_roll_joint' : 0.0, 
-            'left_shoulder_pitch_joint' : 0.0,
-            'left_shoulder_roll_joint' : 0,
-            'left_shoulder_yaw_joint' : 0.0,
-            'left_elbow_joint' : 0,
-            'right_shoulder_pitch_joint' : 0,
-            'right_shoulder_roll_joint' : 0,
-            'right_shoulder_yaw_joint' : 0,
-            'right_elbow_joint' : 0,
+            #left leg
+            'dof_left_hip_yaw_03' : 0. ,
+            'dof_left_hip_roll_03' : 0,
+            'dof_left_hip_pitch_04' : 0,
+            'dof_left_knee_04' : 0,
+            'dof_left_ankle_02' : 0,
+            # right leg
+            'dof_right_hip_yaw_03' : 0,
+            'dof_right_hip_roll_03' : 0,
+            'dof_right_hip_pitch_04' : 0,
+            'dof_right_knee_04' : 0,
+            'dof_right_ankle_02': 0,
+            # left arm
+            'dof_left_shoulder_pitch_03' : 0.0,
+            'dof_left_shoulder_roll_03' : 0,
+            'dof_left_shoulder_yaw_02' : 0.0,
+            'dof_left_elbow_02' : 0,
+            'dof_left_wrist_00': 0,
+            # right arm
+            'dof_right_shoulder_pitch_03' : 0.0,
+            'dof_right_shoulder_roll_03' : 0,
+            'dof_right_shoulder_yaw_02' : 0.0,
+            'dof_right_elbow_02' : 0,
+            'dof_right_wrist_00': 0,
         }
 
         default_joint_angles = { 
-           'left_hip_yaw_joint' : 0. ,   
-           'left_hip_roll_joint' : 0,               
-           'left_hip_pitch_joint' : 0,
-           'left_knee_joint' : 0,
-           'left_ankle_pitch_joint' : 0,
-           'left_ankle_roll_joint' : 0,     
-            'left_wrist_roll_joint' : 0,    
-           'right_hip_yaw_joint' : 0., 
-           'right_hip_roll_joint' : 0, 
-           'right_hip_pitch_joint' : 0,
-           'right_knee_joint' : 0,
-           'right_ankle_pitch_joint': 0,
-           'right_ankle_roll_joint' : 0,       
-           'right_wrist_roll_joint' : 0,
-            'waist_yaw_joint' : 0.0, 
-            'waist_pitch_joint' : 0.0, 
-            'waist_roll_joint' : 0.0, 
-            'left_shoulder_pitch_joint' : 0,
-            'left_shoulder_roll_joint' : 0.0,
-            'left_shoulder_yaw_joint' : 0.0,
-            'left_elbow_joint' : 0,
-            'right_shoulder_pitch_joint' : 0,
-            'right_shoulder_roll_joint' : 0.0,
-            'right_shoulder_yaw_joint' : 0.0,
-            'right_elbow_joint' : 0,
+            #left leg
+            'dof_left_hip_yaw_03' : 0. ,
+            'dof_left_hip_roll_03' : 0,
+            'dof_left_hip_pitch_04' : 0,
+            'dof_left_knee_04' : 0,
+            'dof_left_ankle_02' : 0,
+            # right leg
+            'dof_right_hip_yaw_03' : 0,
+            'dof_right_hip_roll_03' : 0,
+            'dof_right_hip_pitch_04' : 0,
+            'dof_right_knee_04' : 0,
+            'dof_right_ankle_02': 0,
+            # left arm
+            'dof_left_shoulder_pitch_03' : 0.0,
+            'dof_left_shoulder_roll_03' : 0,
+            'dof_left_shoulder_yaw_02' : 0.0,
+            'dof_left_elbow_02' : 0,
+            'dof_left_wrist_00': 0,
+            # right arm
+            'dof_right_shoulder_pitch_03' : 0.0,
+            'dof_right_shoulder_roll_03' : 0,
+            'dof_right_shoulder_yaw_02' : 0.0,
+            'dof_right_elbow_02' : 0,
+            'dof_right_wrist_00': 0,
         }
 
     class env(LeggedRobotCfg.env):
@@ -75,7 +73,7 @@ class KbotCfg( LeggedRobotCfg ):
         control_type = 'P'
         stiffness = {'hip': 150,
                      'knee': 200,
-                     'ankle': 40,
+                     'ankle': 50,
                      'shoulder': 100,
                      'elbow': 100,
                      'wrist': 100,
@@ -124,15 +122,40 @@ class KbotCfg( LeggedRobotCfg ):
         left_knee_name = 'KC_D_401L_L_Shin_Drive'
         right_knee_name = 'KC_D_401R_R_Shin_Drive'
         #TODO confirm
-        foot_name = "ankle"
+        foot_name = "FOOT"
         penalize_contacts_on = ["elbow", 'shoulder', 'knee', 'hip']
         terminate_after_contacts_on = []    #'torse'
 
         left_shoulder_name = "left_shoulder"
         right_shoulder_name = "right_shoulder"
 
-        left_leg_joints = ['left_hip_yaw_joint', 'left_hip_roll_joint', 'left_hip_pitch_joint', 'left_knee_joint', 'left_ankle_pitch_joint', 'left_ankle_roll_joint']
-        right_leg_joints = ['right_hip_yaw_joint', 'right_hip_roll_joint', 'right_hip_pitch_joint', 'right_knee_joint', 'right_ankle_pitch_joint', 'right_ankle_roll_joint']
+        # left leg
+        # 'dof_left_hip_yaw_03': 0.,
+        # 'dof_left_hip_roll_03': 0,
+        # 'dof_left_hip_pitch_04': 0,
+        # 'dof_left_knee_04': 0,
+        # 'dof_left_ankle_02': 0,
+        # # right leg
+        # 'dof_right_hip_yaw_03': 0,
+        # 'dof_right_hip_roll_03': 0,
+        # 'dof_right_hip_pitch_04': 0,
+        # 'dof_right_knee_04': 0,
+        # 'dof_right_ankle_02': 0,
+        # # left arm
+        # 'dof_left_shoulder_pitch_03': 0.0,
+        # 'dof_left_shoulder_roll_03': 0,
+        # 'dof_left_shoulder_yaw_02': 0.0,
+        # 'dof_left_elbow_02': 0,
+        # 'dof_left_wrist_00': 0,
+        # # right arm
+        # 'dof_right_shoulder_pitch_03': 0.0,
+        # 'dof_right_shoulder_roll_03': 0,
+        # 'dof_right_shoulder_yaw_02': 0.0,
+        # 'dof_right_elbow_02': 0,
+        # 'dof_right_wrist_00': 0,
+
+        left_leg_joints = ['dof_left_hip_yaw_03', 'dof_left_hip_roll_03', 'dof_left_hip_pitch_04', 'dof_left_knee_04', 'dof_left_ankle_02']
+        right_leg_joints = ['dof_right_hip_yaw_03', 'dof_right_hip_roll_03', 'dof_right_hip_pitch_04', 'dof_right_knee_04', 'dof_right_ankle_02']
         left_hip_joints = ['left_hip_yaw_joint']
         right_hip_joints = ['right_hip_yaw_joint']
         left_hip_roll_joints = ['left_hip_roll_joint']
