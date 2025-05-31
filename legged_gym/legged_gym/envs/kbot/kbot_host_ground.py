@@ -18,7 +18,7 @@ from legged_gym.utils.math import wrap_to_pi
 from legged_gym.utils.terrain import Terrain
 from legged_gym.utils.isaacgym_utils import get_euler_xyz as get_euler_xyz_in_tensor
 from legged_gym.utils.helpers import class_to_dict
-from .legged_robot_config import LeggedRobotCfg
+from .kbot_config_ground import KbotCfg
 
 from legged_gym.envs.g1.g1_utils import (
     MotionLib, 
@@ -43,8 +43,8 @@ from legged_gym.utils.math import (
 )
 
 
-class LeggedRobot(BaseTask):
-    def __init__(self, cfg: LeggedRobotCfg, sim_params, physics_engine, sim_device, headless):
+class KbotRobot(BaseTask):
+    def __init__(self, cfg: KbotCfg, sim_params, physics_engine, sim_device, headless):
         """ Parses the provided config file,
             calls create_sim() (which creates, simulation and environments),
             initilizes pytorch buffers used during training
@@ -295,7 +295,7 @@ class LeggedRobot(BaseTask):
 
         current_obs *= self.real_episode_length_buf.unsqueeze(1) > self.unactuated_time
         self.obs_buf = torch.cat((self.obs_buf[:, self.num_one_step_obs:self.actor_proprioceptive_obs_length], current_obs), dim=-1)
-
+        print('obs_buf',self.obs_buf)
     def create_sim(self):
         """ Creates simulation, terrain and evironments
         """
@@ -434,25 +434,28 @@ class LeggedRobot(BaseTask):
         """
         #pd controller
         actions_scaled = actions * self.action_rescale
-    
+        # print('actions_scaled',actions_scaled)
         self.joint_pos_target = self.dof_pos + actions_scaled
         if self.cfg.domain_rand.delay:
             self.delay_buffer = torch.concat((self.delay_buffer[1:], actions_scaled.unsqueeze(0)), dim=0)
             self.joint_pos_target = self.dof_pos + self.delay_buffer[self.delay_idx, torch.arange(len(self.delay_idx)), :]
         else:
             self.joint_pos_target = self.dof_pos + actions_scaled
-
+        print('joint_pos_target',self.joint_pos_target)
         control_type = self.cfg.control.control_type
         if control_type=="P":
             torques = self.p_gains * self.Kp_factors * (self.joint_pos_target - self.dof_pos) - self.d_gains *  self.Kd_factors * self.dof_vel
+            # print('p_gains:',self.p_gains,'Kp_factors',self.Kp_factors,'joint_pos_target',self.joint_pos_target,'dof_pos',self.dof_pos,'d_gains',self.d_gains,'Kd_factors',self.Kd_factors,'dof_vel',self.dof_vel)
         elif control_type=="V":
             torques = self.p_gains*(actions_scaled - self.dof_vel) - self.d_gains*(self.dof_vel - self.last_dof_vel)/self.sim_params.dt
         elif control_type=="T":
             torques = actions_scaled
         else:
             raise NameError(f"Unknown controller type: {control_type}")
+        # print('torques1',torques)
         torques = self.motor_strength *  torques + self.actuation_offset
-        
+        # print('torques',torques)
+
         return torch.clip(torques, -self.torque_limits, self.torque_limits)
 
     def _reset_dofs(self, env_ids):
@@ -718,6 +721,7 @@ class LeggedRobot(BaseTask):
         asset_options.disable_gravity = self.cfg.asset.disable_gravity
 
         robot_asset = self.gym.load_asset(self.sim, asset_root, asset_file, asset_options)
+        print(f"Loaded asset: {asset_file}")
         self.num_dof = self.gym.get_asset_dof_count(robot_asset)
         self.num_bodies = self.gym.get_asset_rigid_body_count(robot_asset)
         dof_props_asset = self.gym.get_asset_dof_properties(robot_asset)
@@ -725,6 +729,7 @@ class LeggedRobot(BaseTask):
 
         # save body names from the asset
         body_names = self.gym.get_asset_rigid_body_names(robot_asset)
+        print(f"body_names : {body_names}")
         self.dof_names = self.gym.get_asset_dof_names(robot_asset)
         self.num_bodies = len(body_names)
         self.num_dofs = len(self.dof_names)
@@ -743,7 +748,8 @@ class LeggedRobot(BaseTask):
         start_pose.p = gymapi.Vec3(*self.base_init_state[:3])
 
         self.default_rigid_body_mass = torch.zeros(self.num_bodies, dtype=torch.float, device=self.device, requires_grad=False)
-        self.torso_link_index = body_names.index("torso_link")
+        #todo check what name
+        self.torso_link_index = body_names.index("Torso_Side_Right")
 
         self._get_env_origins()
         env_lower = gymapi.Vec3(0., 0., 0.)
@@ -796,6 +802,7 @@ class LeggedRobot(BaseTask):
         for i in range(len(termination_contact_names)):
             self.termination_contact_indices[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.actor_handles[0], termination_contact_names[i])
 
+        #todo check
         left_shoulder_names = [s for s in body_names if self.cfg.asset.left_shoulder_name in s and 'keyframe' not in s]
         right_shoulder_names = [s for s in body_names if self.cfg.asset.right_shoulder_name in s and 'keyframe' not in s]
         self.left_shoulder_indices = torch.zeros(len(left_shoulder_names), dtype=torch.long, device=self.device, requires_grad=False)
@@ -838,9 +845,9 @@ class LeggedRobot(BaseTask):
         for i in range(len(self.cfg.asset.ankle_joints)):
             self.ankle_joint_indices[i] = self.dof_names.index(self.cfg.asset.ankle_joints[i])
 
-        self.waist_joint_indices = torch.zeros(len(self.cfg.asset.waist_joints), dtype=torch.long, device=self.device, requires_grad=False)
-        for i in range(len(self.cfg.asset.waist_joints)):
-            self.waist_joint_indices[i] = self.dof_names.index(self.cfg.asset.waist_joints[i])
+        #self.waist_joint_indices = torch.zeros(len(self.cfg.asset.waist_joints), dtype=torch.long, device=self.device, requires_grad=False)
+        #for i in range(len(self.cfg.asset.waist_joints)):
+        #    self.waist_joint_indices[i] = self.dof_names.index(self.cfg.asset.waist_joints[i])
 
         self.keyframe_names = [s for s in body_names if self.cfg.asset.keyframe_name in s]
         self.keyframe_indices = torch.zeros(len(self.keyframe_names), dtype=torch.long, device=self.device)
@@ -893,7 +900,7 @@ class LeggedRobot(BaseTask):
         self.hip_pitch_joint_indices = torch.cat((self.left_hip_pitch_joint_indices, self.right_hip_pitch_joint_indices))
 
         self.all_hip_joint_indices = torch.cat([self.hip_pitch_joint_indices, self.hip_roll_joint_indices, self.hip_joint_indices])
-
+        #todo check
         self.left_shoulder_roll_joint_indices = torch.zeros(len(self.cfg.asset.left_shoulder_roll_joints), dtype=torch.long, device=self.device, requires_grad=False)
         for i in range(len(self.cfg.asset.left_shoulder_roll_joints)):
             self.left_shoulder_roll_joint_indices[i] = self.dof_names.index(self.cfg.asset.left_shoulder_roll_joints[i])
@@ -913,7 +920,7 @@ class LeggedRobot(BaseTask):
             self.right_arm_joint_indices[i] = self.dof_names.index(self.cfg.asset.right_arm_joints[i])
 
         # import ipdb; ipdb.set_trace()
-        self.upper_body_joint_indices = torch.cat([self.right_arm_joint_indices, self.left_arm_joint_indices, self.waist_joint_indices])
+        self.upper_body_joint_indices = torch.cat([self.right_arm_joint_indices, self.left_arm_joint_indices])
         self.lower_body_joint_indices = torch.cat([self.all_hip_joint_indices, self.knee_joint_indices, self.ankle_joint_indices])
 
         left_upper_body_names = []

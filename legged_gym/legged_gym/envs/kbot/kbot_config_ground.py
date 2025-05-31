@@ -317,7 +317,7 @@ class KbotCfg( LeggedRobotCfg ):
             contact_collection = 2 # 0: never, 1: last sub-step, 2: all sub-steps (default=2)
 
 
-class G1CfgPPO( LeggedRobotCfgPPO ):
+class KbotCfgPPO( LeggedRobotCfgPPO ):
     runner_class_name = 'OnPolicyRunner'
     class policy:
         init_noise_std = 0.8
