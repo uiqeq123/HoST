@@ -132,8 +132,8 @@ class PiCfg( LeggedRobotCfg ):
         keyframe_name = "keyframe"
         head_name = 'keyframe_head'
 
-        trunk_names = ["base_link"]
-        base_name = 'base_link'
+        trunk_names = ["Torso_Side_Right"]
+        base_name = 'base'
 
       
         left_lower_body_names = ['l_hip_pitch', 'l_ankle_roll', 'l_calf']

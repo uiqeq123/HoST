@@ -156,24 +156,24 @@ class KbotCfg( LeggedRobotCfg ):
 
         left_leg_joints = ['dof_left_hip_yaw_03', 'dof_left_hip_roll_03', 'dof_left_hip_pitch_04', 'dof_left_knee_04', 'dof_left_ankle_02']
         right_leg_joints = ['dof_right_hip_yaw_03', 'dof_right_hip_roll_03', 'dof_right_hip_pitch_04', 'dof_right_knee_04', 'dof_right_ankle_02']
-        left_hip_joints = ['left_hip_yaw_joint']
-        right_hip_joints = ['right_hip_yaw_joint']
-        left_hip_roll_joints = ['left_hip_roll_joint']
-        right_hip_roll_joints = ['right_hip_roll_joint']    
-        left_hip_pitch_joints = ['left_hip_pitch_joint']
-        right_hip_pitch_joints = ['right_hip_pitch_joint']    
+        left_hip_joints = ['dof_left_hip_yaw_03']
+        right_hip_joints = ['dof_right_hip_yaw_03']
+        left_hip_roll_joints = ['dof_left_hip_roll_03']
+        right_hip_roll_joints = ['dof_right_hip_roll_03']
+        left_hip_pitch_joints = ['dof_left_hip_pitch_04']
+        right_hip_pitch_joints = ['dof_right_hip_pitch_04']
 
-        left_shoulder_roll_joints = ['left_shoulder_roll_joint']
-        right_shoulder_roll_joints = ['right_shoulder_roll_joint']    
+        left_shoulder_roll_joints = ['dof_left_shoulder_roll_03']
+        right_shoulder_roll_joints = ['dof_right_shoulder_roll_03']
 
-        left_knee_joints = ['left_knee_joint']
-        right_knee_joints = ['right_knee_joint']    
+        left_knee_joints = ['dof_left_knee_04']
+        right_knee_joints = ['dof_right_knee_04']
 
-        left_arm_joints = ['left_shoulder_pitch_joint', 'left_shoulder_roll_joint', 'left_shoulder_yaw_joint', 'left_elbow_joint', 'left_wrist_roll_joint']
-        right_arm_joints = ['right_shoulder_pitch_joint', 'right_shoulder_roll_joint', 'right_shoulder_yaw_joint', 'right_elbow_joint', 'right_wrist_roll_joint']
-        waist_joints = ["waist_yaw_joint"]
-        knee_joints = ['left_knee_joint', 'right_knee_joint']
-        ankle_joints = [ 'left_ankle_pitch_joint', 'left_ankle_roll_joint', 'right_ankle_pitch_joint', 'right_ankle_roll_joint']
+        left_arm_joints = ['dof_left_shoulder_pitch_03', 'dof_left_shoulder_roll_03', 'dof_left_shoulder_yaw_02', 'dof_left_elbow_02', 'dof_left_wrist_00']
+        right_arm_joints = ['dof_right_shoulder_pitch_03', 'dof_right_shoulder_roll_03', 'dof_right_shoulder_yaw_02', 'dof_right_elbow_02', 'dof_right_wrist_00']
+        # waist_joints = ["waist_yaw_joint"]
+        knee_joints = ['dof_left_knee_04', 'dof_right_knee_04']
+        ankle_joints = [ 'dof_left_ankle_02', 'dof_right_ankle_02']
 
         keyframe_name = "keyframe"
         head_name = 'keyframe_head'
@@ -181,13 +181,13 @@ class KbotCfg( LeggedRobotCfg ):
         trunk_names = ["pelvis", "torso"]
         base_name = 'torso_link'
 
-        left_upper_body_names = ['left_shoulder_pitch', 'left_elbow']
-        right_upper_body_names = ['right_shoulder_pitch', 'right_elbow']
-        left_lower_body_names = ['left_hip_pitch', 'left_ankle_roll', 'left_knee']
-        right_lower_body_names = ['right_hip_pitch', 'right_ankle_roll', 'right_knee']
+        left_upper_body_names = ['dof_left_shoulder_pitch_03', 'dof_left_elbow_02']
+        right_upper_body_names = ['dof_right_shoulder_pitch_03', 'dof_right_elbow_02']
+        left_lower_body_names = ['dof_left_hip_pitch_04', 'dof_left_ankle_02', 'dof_left_knee_04']
+        right_lower_body_names = ['dof_right_hip_pitch_04', 'dof_right_ankle_02', 'dof_right_knee_04']
 
-        left_ankle_names = ['left_ankle_roll']
-        right_ankle_names = ['right_ankle_roll']
+        left_ankle_names = ['dof_left_ankle_02']
+        right_ankle_names = ['dof_right_ankle_02']
 
         density = 0.001
         angular_damping = 0.01
