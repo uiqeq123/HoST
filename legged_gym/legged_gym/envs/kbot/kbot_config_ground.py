@@ -129,30 +129,6 @@ class KbotCfg( LeggedRobotCfg ):
         left_shoulder_name = "left_shoulder"
         right_shoulder_name = "right_shoulder"
 
-        # left leg
-        # 'dof_left_hip_yaw_03': 0.,
-        # 'dof_left_hip_roll_03': 0,
-        # 'dof_left_hip_pitch_04': 0,
-        # 'dof_left_knee_04': 0,
-        # 'dof_left_ankle_02': 0,
-        # # right leg
-        # 'dof_right_hip_yaw_03': 0,
-        # 'dof_right_hip_roll_03': 0,
-        # 'dof_right_hip_pitch_04': 0,
-        # 'dof_right_knee_04': 0,
-        # 'dof_right_ankle_02': 0,
-        # # left arm
-        # 'dof_left_shoulder_pitch_03': 0.0,
-        # 'dof_left_shoulder_roll_03': 0,
-        # 'dof_left_shoulder_yaw_02': 0.0,
-        # 'dof_left_elbow_02': 0,
-        # 'dof_left_wrist_00': 0,
-        # # right arm
-        # 'dof_right_shoulder_pitch_03': 0.0,
-        # 'dof_right_shoulder_roll_03': 0,
-        # 'dof_right_shoulder_yaw_02': 0.0,
-        # 'dof_right_elbow_02': 0,
-        # 'dof_right_wrist_00': 0,
 
         left_leg_joints = ['dof_left_hip_yaw_03', 'dof_left_hip_roll_03', 'dof_left_hip_pitch_04', 'dof_left_knee_04', 'dof_left_ankle_02']
         right_leg_joints = ['dof_right_hip_yaw_03', 'dof_right_hip_roll_03', 'dof_right_hip_pitch_04', 'dof_right_knee_04', 'dof_right_ankle_02']
