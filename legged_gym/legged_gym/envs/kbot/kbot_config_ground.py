@@ -182,7 +182,7 @@ class KbotCfg( LeggedRobotCfg ):
         only_positive_rewards = False # if true negative total rewards are clipped at zero (avoids early termination problems)
         orientation_sigma = 1
         is_gaussian = True
-        target_head_height = 1
+        target_head_height = 1.3
         target_head_margin = 1
         target_base_height_phase1 = 0.45
         target_base_height_phase2 = 0.45
@@ -203,7 +203,7 @@ class KbotCfg( LeggedRobotCfg ):
 
     class constraints( LeggedRobotCfg.rewards ):
         is_gaussian = True
-        target_head_height = 1
+        target_head_height = 1.3
         target_head_margin = 1
         orientation_height_threshold = 0.9
         target_base_height = 0.45
@@ -227,7 +227,7 @@ class KbotCfg( LeggedRobotCfg ):
             regu_dof_vel_limits = -1 
 
             # style reward
-            style_waist_deviation = -10
+            # style_waist_deviation = -10
             style_hip_yaw_deviation = -10
             style_hip_roll_deviation = -10
             style_shoulder_roll_deviation = -2.5

@@ -1,5 +1,10 @@
-<?xml version="1.0" ?>
-<robot name="kbotv2p0_nohands">
+<?xml version="1.0"  encoding="utf-8"?>
+
+<robot name="kbot">
+ <mujoco>
+    <compiler meshdir="meshes" discardvisual="false"/>
+  </mujoco>
+
   <link name="base">
     <visual name="base_visual">
       <geometry name="base_geometry">
